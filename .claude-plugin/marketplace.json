@@ -1,0 +1,16 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "janet-starter",
+  "description": "A personal assistant system for Claude: one assistant that runs your days, your inbox and every project, with a rulebook and skills.",
+  "owner": { "name": "Janet starter" },
+  "plugins": [
+    {
+      "name": "assistant",
+      "description": "The Standard (v1.0) and the assistant's skills: setup, start and finish a chat, fold-in, schedules, replanning, new projects, outside communication, editorial, memory, morning briefing, inbox zero and the nightly check.",
+      "version": "1.0.0",
+      "author": { "name": "Janet starter" },
+      "source": "./plugins/assistant",
+      "category": "productivity"
+    }
+  ]
+}

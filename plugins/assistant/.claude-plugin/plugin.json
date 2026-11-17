@@ -1,0 +1,6 @@
+{
+  "name": "assistant",
+  "version": "1.0.0",
+  "description": "The Standard (v1.0) and the assistant's skills for a personal assistant system.",
+  "author": { "name": "Janet starter" }
+}
