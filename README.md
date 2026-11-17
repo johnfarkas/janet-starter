@@ -18,6 +18,8 @@ plugins/assistant/
     new-project/                    "we have a new project"
     client-communication/  editorial/
     memory/  good-morning/  inbox-zero/  nightly-check/
+    dashboard/                      publishes the person's dashboard from their own account
+templates/dashboard.html            the dashboard page
 scripts/check.sh                    run before every push
 ```
 

@@ -1,0 +1,230 @@
+<title>Assistant Dashboard</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a morning desk. Today's calendar on the left, priorities and projects on the right, tasks below. */
+:root {
+  --bg: #f5f7fa; --surface: #ffffff; --ink: #15203a; --muted: #5a6479; --line: #dbe1ea;
+  --accent: #2c56d6; --ok: #1f7a4d; --warn: #a15c00; --bad: #b42318; --chip: #eef2f8;
+  --display: "Bricolage Grotesque", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  --body: "Atkinson Hyperlegible", "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e131e; --surface: #151c2b; --ink: #e6ebf4; --muted: #9ca7bc; --line: #26304a;
+    --accent: #86a6ff; --ok: #5fd39a; --warn: #f0b45a; --bad: #ff8a80; --chip: #1b2336; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e131e; --surface: #151c2b; --ink: #e6ebf4; --muted: #9ca7bc; --line: #26304a;
+  --accent: #86a6ff; --ok: #5fd39a; --warn: #f0b45a; --bad: #ff8a80; --chip: #1b2336; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 16px/1.5 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0 48px; }
+.wrap { max-width: 1080px; margin: 0 auto; display: grid; gap: 20px; }
+header { display: flex; flex-wrap: wrap; gap: 12px; align-items: end; justify-content: space-between; padding-block: 32px 4px; }
+h1, h2 { font-family: var(--display); margin: 0; line-height: 1.15; text-wrap: balance; }
+h1 { font-size: clamp(1.8rem, 4vw, 2.4rem); letter-spacing: -0.02em; }
+h2 { font-size: 1.1rem; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+h2 small { font: 400 0.8rem var(--body); color: var(--muted); }
+.sub { color: var(--muted); }
+button { font: 600 0.9rem var(--body); color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 8px 14px; cursor: pointer; }
+button:hover { border-color: var(--accent); }
+button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 20px; }
+@media (max-width: 760px) { .grid { grid-template-columns: 1fr; } }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: grid; gap: 12px; align-content: start; min-width: 0; }
+.stack { display: grid; gap: 20px; align-content: start; min-width: 0; }
+ul.list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+ul.list li { padding: 9px 0; border-top: 1px solid var(--line); display: grid; gap: 2px; min-width: 0; }
+ul.list li:first-child { border-top: 0; }
+.ev { grid-template-columns: 5.5rem minmax(0, 1fr); column-gap: 12px; }
+.time { font-family: var(--mono); font-size: 0.85rem; color: var(--accent); font-variant-numeric: tabular-nums; }
+.day { font: 700 0.75rem var(--body); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); padding-top: 12px; }
+.meta { color: var(--muted); font-size: 0.88rem; overflow-wrap: anywhere; }
+.proj { grid-template-columns: auto minmax(0, 1fr); column-gap: 12px; align-items: start; }
+.pill { font: 700 0.72rem var(--body); letter-spacing: 0.04em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; background: var(--chip); white-space: nowrap; }
+.pill.ok { color: var(--ok); } .pill.warn { color: var(--warn); } .pill.bad { color: var(--bad); } .pill.quiet { color: var(--muted); }
+.code { font-family: var(--mono); font-weight: 500; }
+.tasks { columns: 2 22rem; column-gap: 28px; margin: 0; padding: 0; list-style: none; }
+.tasks li { break-inside: avoid; padding: 6px 0 6px 26px; position: relative; overflow-wrap: anywhere; }
+.tasks li::before { content: ""; position: absolute; left: 0; top: 10px; width: 14px; height: 14px; border: 2px solid var(--accent); border-radius: 4px; }
+.state { color: var(--muted); font-size: 0.95rem; }
+.state.err { color: var(--bad); }
+.prio { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1 id="hello">Your day</h1>
+      <p class="sub" id="today"></p>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <span class="sub" id="updated">Not loaded yet</span>
+      <button type="button" id="refresh">Refresh</button>
+    </div>
+  </header>
+
+  <div class="grid">
+    <section class="panel" aria-labelledby="h-cal">
+      <h2 id="h-cal">Calendar <small>next two days</small></h2>
+      <div id="cal"><p class="state">Your calendar appears here once you allow Google Calendar for this page.</p></div>
+    </section>
+    <div class="stack">
+      <section class="panel" aria-labelledby="h-prio">
+        <h2 id="h-prio">This week <small>PRIORITIES.md</small></h2>
+        <div id="prio"><p class="state">Your priorities appear here once you allow Google Drive for this page.</p></div>
+      </section>
+      <section class="panel" aria-labelledby="h-proj">
+        <h2 id="h-proj">Projects <small id="asof">STATUS.md</small></h2>
+        <div id="proj"><p class="state">Each project's status appears here after the first nightly check.</p></div>
+      </section>
+    </div>
+  </div>
+
+  <section class="panel" aria-labelledby="h-tasks">
+    <h2 id="h-tasks">Open tasks <small>TASKS.md</small></h2>
+    <div id="tasks"><p class="state">Your open tasks appear here once you allow Google Drive for this page.</p></div>
+  </section>
+</div>
+
+<script>
+/* Settings. The assistant fills these in when it publishes your copy. */
+var CONFIG = {
+  name: "",                     // your first name, for the greeting
+  folder: "Assistant",          // the Drive folder that holds your files
+  calendarServer: "Google Calendar",
+  driveServer: "Google Drive",
+  maxTasks: 14
+};
+
+var $ = function (id) { return document.getElementById(id); };
+var esc = function (s) { var d = document.createElement("div"); d.textContent = s == null ? "" : String(s); return d.innerHTML; };
+var mcp = null;
+
+function fixMsg(err, server) {
+  var c = err && err.code;
+  if (c === "server_not_connected" || c === "selection_required") return "Add " + server + " in Claude: Settings → Connectors, then refresh.";
+  if (c === "needs_reauth") return "Reconnect " + server + " in Claude: Settings → Connectors, then refresh.";
+  if (c === "not_in_manifest" || c === "approval_required" || c === "consent_required") return "This page needs your OK to read " + server + ". Click Refresh and choose Allow.";
+  if (c === "blocked_by_policy") return "Your organization blocks " + server + " here.";
+  if (c === "server_unavailable" || c === "rate_limited") return server + " didn't answer just now. Try Refresh in a minute.";
+  if (c === "not_granted" || c === "capability_disabled" || c === "capability_removed") return "This view can't reach your connectors. Open the page in the Claude app.";
+  return server + " returned an error" + (err && err.message ? ": " + err.message : "") + ".";
+}
+function showErr(el, err, server) { $(el).innerHTML = '<p class="state err">' + esc(fixMsg(err, server)) + "</p>"; }
+
+function localIso(d) {
+  var p = function (n) { return String(n).padStart(2, "0"); };
+  return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate()) + "T" + p(d.getHours()) + ":" + p(d.getMinutes()) + ":00";
+}
+function unescapeMd(s) { return String(s || "").replace(/\\([\\`*_{}\[\]()#+\-.!|>~])/g, "$1"); }
+function call(server, tool, input) { return mcp.callTool(server, tool, input, { cache: { staleTime: 60000, gcTime: 600000 } }).then(function (r) { return r.payload; }); }
+
+/* Calendar */
+function loadCalendar() {
+  var now = new Date(), end = new Date(now.getTime() + 48 * 3600 * 1000);
+  return call(CONFIG.calendarServer, "list_events", { startTime: localIso(now), endTime: localIso(end), orderBy: "startTime", pageSize: 25 })
+    .then(function (p) {
+      var evs = (p && p.events) || [];
+      if (!evs.length) { $("cal").innerHTML = '<p class="state">Nothing on the calendar for the next two days.</p>'; return; }
+      var html = "", lastDay = "";
+      evs.forEach(function (e) {
+        var s = e.start || {}, startStr = s.dateTime || s.date;
+        var d = new Date(s.dateTime || (s.date + "T00:00:00"));
+        var dayLabel = d.toLocaleDateString(undefined, { weekday: "long", month: "short", day: "numeric" });
+        if (dayLabel !== lastDay) { html += '<li class="day">' + esc(dayLabel) + "</li>"; lastDay = dayLabel; }
+        var t = s.dateTime ? d.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" }) : "All day";
+        var where = e.location && !/^https?:/.test(e.location) ? e.location : (e.location ? "Video call" : "");
+        html += '<li class="ev"><span class="time">' + esc(t) + '</span><span><b>' + esc(e.summary || "(no title)") + "</b>" + (where ? '<br><span class="meta">' + esc(where) + "</span>" : "") + "</span></li>";
+      });
+      $("cal").innerHTML = '<ul class="list">' + html + "</ul>";
+    }, function (err) { showErr("cal", err, CONFIG.calendarServer); });
+}
+
+/* Drive files */
+function findFiles() {
+  var q = "title = '" + CONFIG.folder.replace(/'/g, "\\'") + "' and mimeType = 'application/vnd.google-apps.folder' and trashed = false";
+  return call(CONFIG.driveServer, "search_files", { query: q, pageSize: 5, excludeContentSnippets: true }).then(function (p) {
+    var f = p && p.files && p.files[0];
+    if (!f) throw { code: "no_folder" };
+    return call(CONFIG.driveServer, "search_files", { query: "parentId = '" + f.id + "' and trashed = false", pageSize: 100, excludeContentSnippets: true });
+  }).then(function (p) {
+    var byName = {};
+    ((p && p.files) || []).forEach(function (f) { byName[f.title] = f.id; });
+    return byName;
+  });
+}
+function readFile(id) { return call(CONFIG.driveServer, "read_file_content", { fileId: id }).then(function (p) { return unescapeMd(p && p.fileContent); }); }
+
+function renderTasks(text) {
+  var items = [];
+  text.split(/\r?\n/).forEach(function (l) { var m = l.match(/^\s*[-*]\s+\[ \]\s+(.*)$/); if (m) items.push(m[1].replace(/\*\*/g, "").trim()); });
+  if (!items.length) { $("tasks").innerHTML = '<p class="state">No open tasks. Nice.</p>'; return; }
+  var shown = items.slice(0, CONFIG.maxTasks);
+  $("tasks").innerHTML = '<ul class="tasks">' + shown.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ul>" +
+    (items.length > shown.length ? '<p class="state">And ' + (items.length - shown.length) + " more in TASKS.md.</p>" : "");
+}
+function renderPriorities(text) {
+  var items = [];
+  text.split(/\r?\n/).forEach(function (l) { var m = l.match(/^\s*(?:\d+[.)]|[-*])\s+(?!\[[ x]\])(.*)$/); if (m && items.length < 6) items.push(m[1].replace(/\*\*/g, "").trim()); });
+  $("prio").innerHTML = items.length ? '<ol class="prio">' + items.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ol>" : '<p class="state">PRIORITIES.md has no list yet.</p>';
+}
+function renderStatus(text) {
+  var m = text.match(/```json\s*([\s\S]*?)```/);
+  var data = null;
+  try { data = m ? JSON.parse(m[1]) : null; } catch (e) { data = null; }
+  if (!data || !data.projects) { $("proj").innerHTML = '<p class="state">No project status yet. The nightly check writes it.</p>'; return; }
+  if (data.as_of) $("asof").textContent = "as of " + new Date(data.as_of).toLocaleString(undefined, { weekday: "short", hour: "numeric", minute: "2-digit" });
+  var cls = function (s) { s = (s || "").toLowerCase(); return s === "on track" ? "ok" : s === "at risk" ? "warn" : s === "slipped" ? "bad" : "quiet"; };
+  $("proj").innerHTML = '<ul class="list">' + data.projects.map(function (p) {
+    var n = (p.next || [])[0];
+    var next = n ? esc(n.milestone) + " · " + esc(n.date) + (n.slack ? " · slack " + esc(n.slack) : "") : "No milestone listed";
+    return '<li class="proj"><span class="pill ' + cls(p.status) + '">' + esc(p.status || "quiet") + '</span><span><span class="code">' + esc(p.code) + "</span> " + next + (p.why ? '<br><span class="meta">' + esc(p.why) + "</span>" : "") + "</span></li>";
+  }).join("") + "</ul>";
+}
+function loadDrive() {
+  return findFiles().then(function (files) {
+    var jobs = [];
+    var one = function (name, el, render, missing) {
+      if (!files[name]) { $(el).innerHTML = '<p class="state">' + esc(missing) + "</p>"; return; }
+      jobs.push(readFile(files[name]).then(render, function (err) { showErr(el, err, CONFIG.driveServer); }));
+    };
+    one("TASKS.md", "tasks", renderTasks, "No TASKS.md in your " + CONFIG.folder + " folder yet.");
+    one("PRIORITIES.md", "prio", renderPriorities, "No PRIORITIES.md in your " + CONFIG.folder + " folder yet.");
+    one("STATUS.md", "proj", renderStatus, "No project status yet. The nightly check writes STATUS.md.");
+    return Promise.all(jobs);
+  }, function (err) {
+    if (err && err.code === "no_folder") {
+      ["tasks", "prio", "proj"].forEach(function (el) { $(el).innerHTML = '<p class="state err">No folder named ' + esc(CONFIG.folder) + " in your Google Drive.</p>"; });
+    } else { ["tasks", "prio", "proj"].forEach(function (el) { showErr(el, err, CONFIG.driveServer); }); }
+  });
+}
+
+function loadAll() {
+  $("updated").textContent = "Loading…";
+  return Promise.all([loadCalendar(), loadDrive()]).then(function () {
+    $("updated").textContent = "Updated " + new Date().toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
+  });
+}
+
+(function start() {
+  var now = new Date(), h = now.getHours();
+  var greet = h < 12 ? "Good morning" : h < 17 ? "Good afternoon" : "Good evening";
+  $("hello").textContent = greet + (CONFIG.name ? ", " + CONFIG.name : "");
+  $("today").textContent = now.toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" });
+  $("refresh").addEventListener("click", function () { if (mcp) { mcp.invalidate().catch(function () {}).then(loadAll); } });
+  if (!window.claude || !window.claude.use) { $("updated").textContent = "Open this page in the Claude app to see your data."; return; }
+  window.claude.use("mcp").then(function (m) {
+    mcp = m;
+    if (!mcp) { $("updated").textContent = "This view can't reach your connectors. Open it in the Claude app, signed in as you."; return; }
+    loadAll();
+    setInterval(function () { if (!document.hidden) loadAll(); }, 10 * 60 * 1000);
+  });
+})();
+</script>

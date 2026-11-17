@@ -5,7 +5,7 @@ description: The assistant's rulebook. Read it at the start of every chat in the
 
 # The Standard
 
-*Version 1.0, Nov 17, 2026. Built from the Janet Standard v3.3. Kept in this plugin; this file is the one copy of the rules. What changed is in the plugin's `CHANGELOG.md`.*
+*Version 1.1, Nov 17, 2026. Built from the Janet Standard v3.3. Kept in this plugin; this file is the one copy of the rules. What changed is in the plugin's `CHANGELOG.md`.*
 
 Throughout, "the person" is the human you work for. Their name, and yours, are in `ABOUT-ME.md`.
 
@@ -99,7 +99,7 @@ Each project has a folder `Assistant/projects/<CODE>/`:
 Every Command Center and schedule starts with a stamp line:
 
 ```
-Rulebook: Standard v1.0 (stamped YYYY-MM-DD)
+Rulebook: Standard v1.1 (stamped YYYY-MM-DD)
 ```
 
 Working files (decks, drafts, deliverables, code) live wherever the person keeps them; the Command Center says where.
@@ -117,7 +117,7 @@ Each project has one schedule, the single source for its timeline.
 
 ```
 # <CODE> schedule
-Rulebook: Standard v1.0 (stamped YYYY-MM-DD)
+Rulebook: Standard v1.1 (stamped YYYY-MM-DD)
 Source: <scope of work or contract, with date>
 
 | Milestone | Date | Owner | Depends on | Status | Slack |
@@ -156,6 +156,7 @@ Never rewrite an earlier entry. If the chat changed nothing on that list, skip t
 - **Fold-in and trim** (`assistant:fold-in`), daily. Section limits for a Command Center: "This week" holds the current week; decisions, the last two weeks; blockers, open ones only; current documents, one line each; changelog, the last 10 lines. Size cap about 150 lines. Trimming moves lines to the top of the archive, dated; it never changes a fact.
 - **Monday review**, in the morning briefing: for each active project, where it stands in two sentences, the next milestone and its slack, risks with a recovery step, and the decisions waiting on the person. Then `PRIORITIES.md` for the week.
 - **Never read everything.** Work from Command Centers, schedules, `STATUS.md` and new journal entries, and send a sub-agent or a project chat for depth.
+- **The dashboard** (`assistant:dashboard`) is a private page in the person's own Claude account that reads their calendar, `PRIORITIES.md`, `STATUS.md` and `TASKS.md` live. Keep those files in the shapes it reads: open tasks as `- [ ]` lines, the status page ending in its json block.
 - **Scheduled tasks act for you**, set up in the home Cowork project: the morning briefing and the nightly check (`assistant:nightly-check`), at the times in `ABOUT-ME.md`. They reach the Assistant folder through the Mac, so the Mac must be awake with the Claude app open. A run that couldn't happen shows as a stale `STATUS.md`; the morning briefing says so.
 
 ## 12. Memory

@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.0 (2026-11-17)
+
+- Standard v1.1: section 11 names the dashboard and the file shapes it reads.
+- `setup` Part 3, "Their other tools": every work tool they use (Slack or Teams, meeting notes, a CRM, project tools) is connected, tested and recorded during setup. Parts renumbered (0 to 9).
+- New `dashboard` skill and `templates/dashboard.html`: a private page published from the person's own account that reads their Google Calendar and Assistant folder live through their connectors. Setup Part 9 runs it.
+
+What projects change: nothing.
+
 ## 1.0.1 (2026-11-17)
 
 - Every project is a Cowork project, made in the Cowork tab of the Claude desktop app (Standard section 3). `new-project`, `setup`, `home` and `start-chat` say Cowork throughout.

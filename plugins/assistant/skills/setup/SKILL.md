@@ -13,7 +13,7 @@ You are setting up a person's own assistant. They are not a developer. Load `ass
 - **Secrets never pass through chat.** Passwords, app passwords and codes go into the provider's own page or a Mac dialog. If they paste one into chat, tell them to change it, and carry on.
 - **Account creation is theirs.** They choose every password and type every code.
 - **Save as you go.** After each part, write the answers to `setup-answers.md` in the Assistant folder (heading per part, one line per answer, no secrets). If the chat stops, a new chat with "continue setup" reads that file, says where they left off in one line, and carries on.
-- Keep it warm and brisk. Say how far along they are at the start of each part ("Part 3 of 8").
+- Keep it warm and brisk. Say how far along they are at the start of each part ("Part 3 of 9").
 
 ## Part 0: Check you can reach things
 
@@ -68,31 +68,44 @@ Then set it up, one route at a time.
 
 Write the **mail plan** (each mailbox, its route, the draft address, each calendar and how it's reached) to `setup-answers.md` now.
 
-## Part 3: About them
+## Part 3: Their other tools
 
-10. **Where they live and work, and the time zones they keep.**
-11. **How they like to be worked with:** one question at a time or a list, bullets or prose, how blunt, anything that makes work harder for them (ADHD, travel, a busy season).
-12. **Their writing voice:** ask them to paste two or three emails they wrote and liked. Write five to eight voice notes from them, show the notes, and keep what they approve.
+Every tool they use for work joins now, so the briefing, the nightly check and the dashboard see it from day one.
 
-## Part 4: Work
+10. **Which other tools they use for work.** Offer the usual ones so they can just say yes or no: Slack or Microsoft Teams, meeting notes (Granola, Otter, Fireflies, Zoom), a CRM (HubSpot, Salesforce, Pipedrive), project tools (Asana, Notion, Monday, Linear, Trello), files outside Google (Dropbox, Box, OneDrive), and anything else they open every day.
 
-13. **Their roles and companies,** one line each, in the wording they want used.
-14. **Their projects.** First the list (name and one line each). Then, one project at a time, run `assistant:new-project` steps 1–4. Recommend separate Cowork projects (its step 5) only for the one to three busiest; the rest start inside the home project and move later.
-15. **Key people outside projects:** family, advisors, assistants, anyone you should recognize. Each becomes a memory file.
-16. **Other tools:** Slack or Teams, meeting notes, a CRM, project tools. For each, give the steps to connect it in Settings → Connectors, and check it answers.
+Then, **one tool at a time:**
+1. Say in one line what it gives them once it's connected (Slack: who's waiting on them, in the briefing, with replies drafted; meeting notes: action items and promises, into tasks and project journals; a CRM: deals and contacts in project status; project tools: what's due, in the schedule).
+2. Lead the connection: in the Claude app, Settings → Connectors → Browse connectors; search for the tool's name; click it, then **Connect**; sign in on the tool's own page and click **Allow**. They should see it marked as connected. If it isn't in the list, say so plainly, note it under "Other tools" as "not connected (no connector)", and move on.
+3. **Test it** with one read (Slack: the latest message in a channel they name; meeting notes: their latest meeting; a CRM: one recent contact; a project tool: one open item). Tell them what you saw in one line.
+4. Ask what you should use it for and what to leave alone (for Slack: which channels matter, and whether you may draft replies).
 
-## Part 5: The day
+Record each tool under "Other tools" in `setup-answers.md`: the connector's name exactly as Claude shows it, what it's for, what to leave alone. If a tool needs a sign-in that's theirs (a company admin approving the connector), add it to their checklist and carry on.
+
+## Part 4: About them
+
+11. **Where they live and work, and the time zones they keep.**
+12. **How they like to be worked with:** one question at a time or a list, bullets or prose, how blunt, anything that makes work harder for them (ADHD, travel, a busy season).
+13. **Their writing voice:** ask them to paste two or three emails they wrote and liked. Write five to eight voice notes from them, show the notes, and keep what they approve.
+
+## Part 5: Work
+
+14. **Their roles and companies,** one line each, in the wording they want used.
+15. **Their projects.** First the list (name and one line each). Then, one project at a time, run `assistant:new-project` steps 1–4. Recommend separate Cowork projects (its step 5) only for the one to three busiest; the rest start inside the home project and move later.
+16. **Key people outside projects:** family, advisors, assistants, anyone you should recognize. Each becomes a memory file.
+
+## Part 6: The day
 
 17. **When they want the morning briefing and the end-of-day wrap-up, and whether both should include their texts (Messages on the Mac).**
 18. **What counts as urgent, who should always reach them, and what to ignore.** Also: should the junk sweep trash obvious junk without asking each time?
 19. **What the dashboard should show** (today's calendar, tasks, projects at risk, mail waiting, anything else).
 
-## Part 6: Boundaries
+## Part 7: Boundaries
 
 20. **What's off-limits:** accounts, people or topics you never touch.
 21. **Who else may see any of this:** a spouse, an assistant, nobody.
 
-## Part 7: Build their files
+## Part 8: Build their files
 
 In the Assistant folder, write each and read it back:
 - `ABOUT-ME.md`, in this shape:
@@ -107,7 +120,7 @@ In the Assistant folder, write each and read it back:
   Name: <name>. Manner: <their words>.
 
   ## How I work
-  <their answers to question 11, as short lines>
+  <their answers to question 12, as short lines>
 
   ## My voice
   <the approved voice notes>
@@ -136,12 +149,12 @@ In the Assistant folder, write each and read it back:
   ```
 - `PRIORITIES.md` (this week, from what they told you), `TASKS.md` (anything they mentioned they owe), `HANDOFF.md` (the next seven days from their calendar; a "System changes" line: "Set up <date>"), `PROJECTS.md` (one card per project), `NOTES.md` (a heading and one line: "Leave me notes here."), `STATUS.md` (a heading only), `memory/index.md`, the `notes/` folder, and `imessage-read.md` if texts are on.
 
-## Part 8: Finish the setup
+## Part 9: Finish the setup
 
 1. **Home project instructions.** The starter block they pasted at the start was temporary. Give them the final block from the template at the end of `assistant:standard`, filled in with the assistant's name, to replace what's in the home project's instructions. Steps: open the home project → Instructions → select all → paste → save. Rename the project to the assistant's name.
 2. **Scheduled tasks.** Two, in the home project: the morning briefing at their time ("Run assistant:good-morning.") and the nightly check at their time ("Run assistant:nightly-check."). Create them yourself if you have a scheduling tool; otherwise lead them through the app's scheduled tasks screen. Tell them both need the Mac awake with the Claude app open.
 3. **Claude Code, ready.** Steps: open the Code tab → open the folder `Assistant/projects/<a project code>` → type `join <CODE>: say hello and write a test journal entry`. It should answer in two lines and add a short entry to that project's journal; you read it back.
-4. **The dashboard.** If this plugin has an `assistant:dashboard` skill, run it now. If it doesn't, say the dashboard comes in the next version of the plugin.
+4. **The dashboard.** Run `assistant:dashboard`. It publishes their dashboard from their own account, showing what they chose in question 19, and leads them through allowing it to read their calendar and Drive.
 5. **Their checklist.** One list of everything left that's theirs, in order, each with how long it takes.
 6. **First good morning.** Tell them: start a new task in the home Cowork project tomorrow morning and say "good morning". Or run `assistant:good-morning` now, so they see it working today.
 
