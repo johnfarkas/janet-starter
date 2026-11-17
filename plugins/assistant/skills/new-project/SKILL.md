@@ -22,9 +22,9 @@ The home assistant runs this.
 
    Then give the person numbered steps, one action each, each saying what they should see, with the block to copy:
    1. In the Claude desktop app, open the **Cowork** tab and create a new project named "<Client> - <CODE>".
-   2. Add the folder `Assistant/projects/<CODE>` to the project, and the working-files folder if there is one.
+   2. Attach the **whole** Assistant folder to the project (its chats read your profile and their record there), and the working-files folder if there is one.
    3. Paste the project instructions into the project's instructions and save.
    4. Start a new task in the project and type "hi, where do things stand?" It should load `assistant:start-chat` and answer from the new Command Center.
 
-   Wait for "done" after each.
+   Use the exact click paths in `assistant:cowork-guide`. Wait for "done" after each. Then add the instructions block to `PROMPTS.md` under the project's code.
 6. **Record it:** a HANDOFF line and the journal's first entry. The nightly check picks the project up the next night.

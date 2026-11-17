@@ -19,6 +19,8 @@ plugins/assistant/
     client-communication/  editorial/
     memory/  good-morning/  inbox-zero/  nightly-check/
     dashboard/                      publishes the person's dashboard from their own account
+    weekly-check/                   Monday: is everything working, has anything drifted
+    cowork-guide/                   the exact click paths in the Claude desktop app
 templates/dashboard.html            the dashboard page
 scripts/check.sh                    run before every push
 ```
@@ -27,7 +29,7 @@ scripts/check.sh                    run before every push
 
 Start from the front page you were sent. It walks you through installing the Claude app, connecting Google, adding this plugin, and opening the chat where your assistant sets you up.
 
-**Adding this plugin in the Claude app:** Settings → Plugins (or Customize → Plugins) → Add marketplace → paste `https://github.com/johnfarkas/janet-starter` → install **assistant**.
+**Adding this plugin in the Claude desktop app:** **Customize** → **Plugins** → **Add** → **Add marketplace** → paste `johnfarkas/janet-starter` → under **Discover**, add **assistant** → turn on **Sync automatically**. The full click paths for everything in the app are in the `cowork-guide` skill.
 
 **Your mail connector** lives in its own repository, `https://github.com/johnfarkas/janet-mail`. The setup interview tells you whether you need it, and hands the deploy to Claude Code.
 

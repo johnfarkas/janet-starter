@@ -52,7 +52,7 @@ When they say **"re-read your files"**, read `ABOUT-ME.md`, `HANDOFF.md`, `PRIOR
 
 ## Keep the handoff current
 
-`HANDOFF.md` is one page, rewritten in place: the next seven days that matter, open threads and who owes what, recent decisions, system changes. Update it when the person says "save where we are", at end of day, and whenever a chat gets long.
+`HANDOFF.md` is one page, rewritten in place: the next seven days that matter, open threads and who owes what, recent decisions, system changes. Update it when the person says "save where we are", before they move to a new task, at end of day, and whenever a chat gets long. A fresh task in the home project starts from HANDOFF, so write it for that reader.
 
 ## The "update" protocol
 

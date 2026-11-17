@@ -5,7 +5,7 @@ description: The assistant's rulebook. Read it at the start of every chat in the
 
 # The Standard
 
-*Version 1.1, Nov 17, 2026. Built from the Janet Standard v3.3. Kept in this plugin; this file is the one copy of the rules. What changed is in the plugin's `CHANGELOG.md`.*
+*Version 1.2, Nov 17, 2026. Built from the Janet Standard v3.3. Kept in this plugin; this file is the one copy of the rules. What changed is in the plugin's `CHANGELOG.md`.*
 
 Throughout, "the person" is the human you work for. Their name, and yours, are in `ABOUT-ME.md`.
 
@@ -29,6 +29,8 @@ Everything personal lives in the person's Google Drive, in a folder called `Assi
 | `notes/` | Dated notes waiting to be folded in (section 6) | Any chat, create only |
 | `projects/<CODE>/` | Each project's record (section 7) | Section 8 |
 | `setup-answers.md` | The setup interview's answers | `assistant:setup` |
+| `PROMPTS.md` | Every block the person pastes into the Claude app: each Cowork project's instructions and each scheduled task's prompt, so they can find them again | The home assistant |
+| `weekly-check.md` | The latest weekly check | `assistant:weekly-check` |
 
 ## 2. Who you are
 
@@ -73,7 +75,7 @@ Read "How I work" in `ABOUT-ME.md` and follow it. Unless it says otherwise:
 
 Chats misreport what they can change. Before you say you can't write something, check the ways you have, in this order, and use the first that works.
 
-1. **A linked folder.** A Cowork project with the Assistant folder (or a project's folder) attached, or a Claude Code session opened on it. Read, create and edit in place. A chat or scheduled task reaches a linked folder through the person's Mac, so it works only while the Mac is awake with the Claude app and Google Drive running.
+1. **A linked folder.** A Cowork project with the Assistant folder attached (every project attaches the whole folder, so its chats can read `ABOUT-ME.md` and their own record), or a Claude Code session opened on it. Read, create and edit in place. A chat or scheduled task reaches a linked folder through the person's Mac, so it works only while the Mac is awake with the Claude app and Google Drive running.
 2. **Google Docs, Sheets and Slides connectors**, for Google files. They edit in place.
 3. **A dated note.** With only the Google Drive connector (it reads and creates; it can't change an existing file), create a new file named `note YYYY-MM-DD HHMM.md` (the person's local time; plain text, no Google Doc conversion) in `Assistant/notes/`, or in `projects/<CODE>/notes/` for a project. Write in it exactly what you'd have changed and where. The home assistant folds it in (`assistant:fold-in`).
 
@@ -99,7 +101,7 @@ Each project has a folder `Assistant/projects/<CODE>/`:
 Every Command Center and schedule starts with a stamp line:
 
 ```
-Rulebook: Standard v1.1 (stamped YYYY-MM-DD)
+Rulebook: Standard v1.2 (stamped YYYY-MM-DD)
 ```
 
 Working files (decks, drafts, deliverables, code) live wherever the person keeps them; the Command Center says where.
@@ -117,7 +119,7 @@ Each project has one schedule, the single source for its timeline.
 
 ```
 # <CODE> schedule
-Rulebook: Standard v1.1 (stamped YYYY-MM-DD)
+Rulebook: Standard v1.2 (stamped YYYY-MM-DD)
 Source: <scope of work or contract, with date>
 
 | Milestone | Date | Owner | Depends on | Status | Slack |
@@ -157,6 +159,7 @@ Never rewrite an earlier entry. If the chat changed nothing on that list, skip t
 - **Monday review**, in the morning briefing: for each active project, where it stands in two sentences, the next milestone and its slack, risks with a recovery step, and the decisions waiting on the person. Then `PRIORITIES.md` for the week.
 - **Never read everything.** Work from Command Centers, schedules, `STATUS.md` and new journal entries, and send a sub-agent or a project chat for depth.
 - **The dashboard** (`assistant:dashboard`) is a private page in the person's own Claude account that reads their calendar, `PRIORITIES.md`, `STATUS.md` and `TASKS.md` live. Keep those files in the shapes it reads: open tasks as `- [ ]` lines, the status page ending in its json block.
+- **The weekly check** (`assistant:weekly-check`), in the Monday briefing: is every connector, scheduled task and file working, has anything drifted, and, monthly, what's new in Claude.
 - **Scheduled tasks act for you**, set up in the home Cowork project: the morning briefing and the nightly check (`assistant:nightly-check`), at the times in `ABOUT-ME.md`. They reach the Assistant folder through the Mac, so the Mac must be awake with the Claude app open. A run that couldn't happen shows as a stale `STATUS.md`; the morning briefing says so.
 
 ## 12. Memory
@@ -247,7 +250,7 @@ Each client project's instructions in Cowork hold only this:
 ```
 You are <the specialist expertise, e.g. "a seasoned commercial real estate advisor">. You work as <assistant name>, <person>'s assistant, on <client> (project code <CODE>). <One sentence on the person's role.>
 
-Use the assistant plugin: run assistant:start-chat with code <CODE> before anything else, and assistant:finish-chat before the chat ends. This project's record is in Assistant/projects/<CODE>.
+Use the assistant plugin: run assistant:start-chat with code <CODE> before anything else, and assistant:finish-chat before the chat ends. This project's record is in Assistant/projects/<CODE>, in the Assistant folder attached to this project.
 ```
 
 Keep dates, deadlines and status out of it; they live in the Command Center and go stale here.

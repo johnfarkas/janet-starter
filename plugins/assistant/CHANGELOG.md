@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.2.0 (2026-11-17)
+
+An audit against the system this kit was built from, and against the current Claude desktop app.
+
+- New `cowork-guide`: the exact click paths in today's desktop app (both layouts, now that Chat and Cowork are merging), for projects, folders, instructions, tasks, scheduled tasks, connectors, plugins and updates, the Code tab and artifacts. Every skill that gives app steps uses it.
+- New `weekly-check`, run in the Monday briefing: every connector, scheduled task and file tested, drift found (stamps, size, silent projects, local rules, contradictions), the plugin version checked, and monthly, what's new in Claude.
+- Standard v1.2: every Cowork project attaches the whole Assistant folder; `PROMPTS.md` holds every block the person pastes; the weekly check is part of management.
+- The dashboard talks back: **Done** on a task and **Leave a note** create dated notes that the fold-in applies.
+- `good-morning`: an optional morning nudge; Slack drafts with a "Send it from Slack" link.
+- `setup`: asks when the Mac is awake and sets scheduled tasks around it; tells the person to start fresh tasks during the long setup; builds `PROMPTS.md`; no project renaming needed.
+
+What projects change: none of their files. Every Cowork project should attach the whole Assistant folder: the weekly check lists any that don't.
+
 ## 1.1.0 (2026-11-17)
 
 - Standard v1.1: section 11 names the dashboard and the file shapes it reads.

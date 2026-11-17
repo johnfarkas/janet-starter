@@ -56,6 +56,13 @@ ul.list li:first-child { border-top: 0; }
 .state { color: var(--muted); font-size: 0.95rem; }
 .state.err { color: var(--bad); }
 .prio { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.tasks li { display: flex; gap: 10px; align-items: baseline; justify-content: space-between; }
+.tasks li span { min-width: 0; }
+.tasks li.done span { text-decoration: line-through; color: var(--muted); }
+.mini { font-size: 0.78rem; padding: 2px 8px; border-radius: 6px; flex: none; }
+textarea { width: 100%; min-height: 84px; font: 16px/1.5 var(--body); color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 10px; resize: vertical; }
+textarea:focus-visible { outline: 3px solid var(--accent); outline-offset: 1px; }
+.row-end { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
 </style>
 
 <div class="wrap">
@@ -90,6 +97,13 @@ ul.list li:first-child { border-top: 0; }
   <section class="panel" aria-labelledby="h-tasks">
     <h2 id="h-tasks">Open tasks <small>TASKS.md</small></h2>
     <div id="tasks"><p class="state">Your open tasks appear here once you allow Google Drive for this page.</p></div>
+  </section>
+
+  <section class="panel" aria-labelledby="h-note">
+    <h2 id="h-note">Leave a note <small>picked up in your next briefing</small></h2>
+    <label for="note" class="sub">Anything your assistant should know or do.</label>
+    <textarea id="note"></textarea>
+    <div class="row-end"><button type="button" id="send">Send note</button><span class="state" id="note-state"></span></div>
   </section>
 </div>
 
@@ -157,8 +171,28 @@ function findFiles() {
   }).then(function (p) {
     var byName = {};
     ((p && p.files) || []).forEach(function (f) { byName[f.title] = f.id; });
+    FILES = byName;
     return byName;
   });
+}
+var FILES = null;
+
+/* Notes back to the assistant: a new file in the Assistant folder's notes/ folder, folded in next morning. */
+function stamp() {
+  var d = new Date(), p = function (n) { return String(n).padStart(2, "0"); };
+  return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate()) + " " + p(d.getHours()) + p(d.getMinutes()) + p(d.getSeconds());
+}
+function writeNote(line) {
+  if (!mcp) return Promise.reject({ code: "not_granted" });
+  if (!FILES || !FILES.notes) return Promise.reject({ code: "no_notes" });
+  return mcp.callTool(CONFIG.driveServer, "create_file", {
+    title: "note " + stamp() + ".md", parentId: FILES.notes,
+    textContent: "From the dashboard\n\n" + line + "\n", contentMimeType: "text/markdown", disableConversionToGoogleType: true
+  }, { cache: false });
+}
+function noteErr(err) {
+  if (err && err.code === "no_notes") return "No notes folder in your " + CONFIG.folder + " folder yet. Ask your assistant to make one.";
+  return fixMsg(err, CONFIG.driveServer);
 }
 function readFile(id) { return call(CONFIG.driveServer, "read_file_content", { fileId: id }).then(function (p) { return unescapeMd(p && p.fileContent); }); }
 
@@ -167,8 +201,17 @@ function renderTasks(text) {
   text.split(/\r?\n/).forEach(function (l) { var m = l.match(/^\s*[-*]\s+\[ \]\s+(.*)$/); if (m) items.push(m[1].replace(/\*\*/g, "").trim()); });
   if (!items.length) { $("tasks").innerHTML = '<p class="state">No open tasks. Nice.</p>'; return; }
   var shown = items.slice(0, CONFIG.maxTasks);
-  $("tasks").innerHTML = '<ul class="tasks">' + shown.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ul>" +
+  $("tasks").innerHTML = '<ul class="tasks">' + shown.map(function (t, i) { return '<li><span>' + esc(t) + '</span><button type="button" class="mini" data-task="' + i + '">Done</button></li>'; }).join("") + "</ul>" +
     (items.length > shown.length ? '<p class="state">And ' + (items.length - shown.length) + " more in TASKS.md.</p>" : "");
+  $("tasks").querySelectorAll("[data-task]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var t = shown[Number(b.getAttribute("data-task"))];
+      b.disabled = true; b.textContent = "Saving…";
+      writeNote("Done: " + t).then(function () {
+        b.parentNode.classList.add("done"); b.textContent = "Noted";
+      }, function (err) { b.disabled = false; b.textContent = "Done"; $("note-state").textContent = noteErr(err); });
+    });
+  });
 }
 function renderPriorities(text) {
   var items = [];
@@ -219,6 +262,14 @@ function loadAll() {
   $("hello").textContent = greet + (CONFIG.name ? ", " + CONFIG.name : "");
   $("today").textContent = now.toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" });
   $("refresh").addEventListener("click", function () { if (mcp) { mcp.invalidate().catch(function () {}).then(loadAll); } });
+  $("send").addEventListener("click", function () {
+    var text = $("note").value.trim();
+    if (!text) { $("note-state").textContent = "Write something first."; return; }
+    $("send").disabled = true; $("note-state").textContent = "Sending…";
+    writeNote("Note: " + text.replace(/\n+/g, " ")).then(function () {
+      $("note").value = ""; $("note-state").textContent = "Sent. It'll be in your next briefing.";
+    }, function (err) { $("note-state").textContent = noteErr(err); }).then(function () { $("send").disabled = false; });
+  });
   if (!window.claude || !window.claude.use) { $("updated").textContent = "Open this page in the Claude app to see your data."; return; }
   window.claude.use("mcp").then(function (m) {
     mcp = m;

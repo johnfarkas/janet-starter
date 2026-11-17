@@ -12,6 +12,7 @@ The home assistant, or a scheduled task acting for it, is the single writer of C
 Look in `Assistant/notes/` and in each `projects/<CODE>/notes/` for `note *.md`. For each:
 - a project journal entry goes to the end of that project's `journal.md`, unchanged;
 - a change to one of your own files is applied to the file it names;
+- a note from the dashboard (it starts `From the dashboard`): a `Done:` line marks that task `[x]` in `TASKS.md` with today's date; a `Note:` line goes to the end of `NOTES.md`, dated;
 - then the note moves into a `_processed` folder beside it.
 
 ## 2. Fold each project's new entries
