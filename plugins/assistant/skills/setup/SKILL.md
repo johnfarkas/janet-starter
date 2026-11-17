@@ -60,7 +60,7 @@ Then set it up, one route at a time.
 1. **App passwords first.** For each mailbox, lead them to its app-password page (Google: myaccount.google.com/apppasswords, with two-step sign-in on; iCloud: account.apple.com → Sign-In and Security → App-Specific Passwords; Outlook.com: account.microsoft.com → Security → Advanced security options → App passwords). They create it and keep that page open; it goes into a Mac dialog in the next step, never into chat.
 2. **Hand the deploy to Claude Code** (Standard section 15). Give them this brief to paste in the Code tab, opened on their home folder:
    ```
-   Set up my mail connector. Follow the setup steps in the README of the janet-mail repository on GitHub (the address is in the README of the janet-starter repository). My mailboxes: <the list, provider and address for each>. My GitHub username: <username>. My time zone: <zone>. Lead me one step at a time; I'm not a developer. Every password goes into a Mac dialog, never into this chat.
+   Set up my mail connector. Follow the setup steps in the README of https://github.com/johnfarkas/janet-mail. My mailboxes: <the list, provider and address for each>. My GitHub username: <username>. My time zone: <zone>. Lead me one step at a time; I'm not a developer. Every password goes into a Mac dialog, never into this chat.
    Done when: the connector is deployed, added in the Claude app, and lists every mailbox.
    Then: tell me to go back to my setup chat and say "mail is connected".
    ```

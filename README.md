@@ -25,9 +25,9 @@ scripts/check.sh                    run before every push
 
 Start from the front page you were sent. It walks you through installing the Claude app, connecting Google, adding this plugin, and opening the chat where your assistant sets you up.
 
-**Adding this plugin in the Claude app:** Settings → Plugins (or Customize → Plugins) → Add marketplace → paste `https://github.com/GITHUB-OWNER/janet-starter` → install **assistant**.
+**Adding this plugin in the Claude app:** Settings → Plugins (or Customize → Plugins) → Add marketplace → paste `https://github.com/johnfarkas/janet-starter` → install **assistant**.
 
-**Your mail connector** lives in its own repository, `https://github.com/GITHUB-OWNER/janet-mail`. The setup interview tells you whether you need it, and hands the deploy to Claude Code.
+**Your mail connector** lives in its own repository, `https://github.com/johnfarkas/janet-mail`. The setup interview tells you whether you need it, and hands the deploy to Claude Code.
 
 ## Rules for this repository
 
