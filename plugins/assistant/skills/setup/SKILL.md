@@ -77,7 +77,7 @@ Write the **mail plan** (each mailbox, its route, the draft address, each calend
 ## Part 4: Work
 
 13. **Their roles and companies,** one line each, in the wording they want used.
-14. **Their projects.** First the list (name and one line each). Then, one project at a time, run `assistant:new-project` steps 1–4. Recommend separate Claude projects (its step 5) only for the one to three busiest; the rest start inside the home project and move later.
+14. **Their projects.** First the list (name and one line each). Then, one project at a time, run `assistant:new-project` steps 1–4. Recommend separate Cowork projects (its step 5) only for the one to three busiest; the rest start inside the home project and move later.
 15. **Key people outside projects:** family, advisors, assistants, anyone you should recognize. Each becomes a memory file.
 16. **Other tools:** Slack or Teams, meeting notes, a CRM, project tools. For each, give the steps to connect it in Settings → Connectors, and check it answers.
 
@@ -138,11 +138,11 @@ In the Assistant folder, write each and read it back:
 
 ## Part 8: Finish the setup
 
-1. **Home project instructions.** Give them the final block from the template at the end of `assistant:standard`, filled in with the assistant's name, to replace what's in the home project's instructions. Steps: open the home project → Instructions → select all → paste → save. Rename the project to the assistant's name.
+1. **Home project instructions.** The starter block they pasted at the start was temporary. Give them the final block from the template at the end of `assistant:standard`, filled in with the assistant's name, to replace what's in the home project's instructions. Steps: open the home project → Instructions → select all → paste → save. Rename the project to the assistant's name.
 2. **Scheduled tasks.** Two, in the home project: the morning briefing at their time ("Run assistant:good-morning.") and the nightly check at their time ("Run assistant:nightly-check."). Create them yourself if you have a scheduling tool; otherwise lead them through the app's scheduled tasks screen. Tell them both need the Mac awake with the Claude app open.
 3. **Claude Code, ready.** Steps: open the Code tab → open the folder `Assistant/projects/<a project code>` → type `join <CODE>: say hello and write a test journal entry`. It should answer in two lines and add a short entry to that project's journal; you read it back.
 4. **The dashboard.** If this plugin has an `assistant:dashboard` skill, run it now. If it doesn't, say the dashboard comes in the next version of the plugin.
 5. **Their checklist.** One list of everything left that's theirs, in order, each with how long it takes.
-6. **First good morning.** Tell them: open a new chat in the home project tomorrow morning and say "good morning". Or run `assistant:good-morning` now, so they see it working today.
+6. **First good morning.** Tell them: start a new task in the home Cowork project tomorrow morning and say "good morning". Or run `assistant:good-morning` now, so they see it working today.
 
 Mark `setup-answers.md` with `Setup finished <date>`, and add a HANDOFF line.

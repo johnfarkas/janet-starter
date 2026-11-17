@@ -7,7 +7,7 @@
     {
       "name": "assistant",
       "description": "The Standard (v1.0) and the assistant's skills: setup, start and finish a chat, fold-in, schedules, replanning, new projects, outside communication, editorial, memory, morning briefing, inbox zero and the nightly check.",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "author": { "name": "Janet starter" },
       "source": "./plugins/assistant",
       "category": "productivity"

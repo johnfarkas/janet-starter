@@ -1,6 +1,6 @@
 ---
 name: start-chat
-description: Start a project chat. Use at the beginning of any chat in one of the person's client projects (a Claude project whose instructions say "use the assistant plugin"), and when a Claude Code session joins a project, which the person starts with "join <CODE>" (for example "join ACM - fix the pricing page") or by pasting a Claude Code brief. Loads the rulebook, the project's Command Center and schedule, any open requests for Claude Code, and checks how this chat can write.
+description: Start a project chat. Use at the beginning of any chat in one of the person's client projects (a Cowork project whose instructions say "use the assistant plugin"), and when a Claude Code session joins a project, which the person starts with "join <CODE>" (for example "join ACM - fix the pricing page") or by pasting a Claude Code brief. Loads the rulebook, the project's Command Center and schedule, any open requests for Claude Code, and checks how this chat can write.
 ---
 
 # Start a project chat

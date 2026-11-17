@@ -1,6 +1,6 @@
 ---
 name: home
-description: The home assistant's job, reach and authority. Use at the start of every chat in the person's home project (the Claude project named after their assistant), when the person says "re-read your files", whenever the assistant needs to decide whether to act, ask, or leave something to the person, and for the "update" protocol.
+description: The home assistant's job, reach and authority. Use at the start of every chat in the person's home project (the Cowork project named after their assistant), when the person says "re-read your files", whenever the assistant needs to decide whether to act, ask, or leave something to the person, and for the "update" protocol.
 ---
 
 # The home assistant

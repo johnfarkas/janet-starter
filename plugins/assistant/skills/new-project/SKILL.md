@@ -21,10 +21,10 @@ The home assistant runs this.
 5. **Write the project instructions** from the template at the end of `assistant:standard`, filled in. Check before you hand it over: both paragraphs; the second names `assistant:start-chat`, `assistant:finish-chat` and the code; the first holds no dates or status.
 
    Then give the person numbered steps, one action each, each saying what they should see, with the block to copy:
-   1. In the Claude app, create a new project named "<Client> - <CODE>".
+   1. In the Claude desktop app, open the **Cowork** tab and create a new project named "<Client> - <CODE>".
    2. Add the folder `Assistant/projects/<CODE>` to the project, and the working-files folder if there is one.
    3. Paste the project instructions into the project's instructions and save.
-   4. Open a new chat in the project and type "hi, where do things stand?" It should load `assistant:start-chat` and answer from the new Command Center.
+   4. Start a new task in the project and type "hi, where do things stand?" It should load `assistant:start-chat` and answer from the new Command Center.
 
    Wait for "done" after each.
 6. **Record it:** a HANDOFF line and the journal's first entry. The nightly check picks the project up the next night.

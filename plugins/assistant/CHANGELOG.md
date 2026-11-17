@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.1 (2026-11-17)
+
+- Every project is a Cowork project, made in the Cowork tab of the Claude desktop app (Standard section 3). `new-project`, `setup`, `home` and `start-chat` say Cowork throughout.
+- `setup` Part 8 says the starter instructions pasted at the start are temporary and replaced by the full block.
+
+What projects change: nothing.
+
 ## 1.0.0 (2026-11-17)
 
 First version, built from the Janet Standard v3.3 (plugin 3.3.3).
