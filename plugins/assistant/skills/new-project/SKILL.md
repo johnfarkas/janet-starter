@@ -15,6 +15,8 @@ The home assistant runs this.
    5. Key dates.
    6. The people, with roles.
    7. Whether anything about it is confidential, and what.
+**From Prospects.** When a prospect in the pipeline signs (`assistant:prospects`, Promote), it keeps its code. Read `projects/PRO/profiles/<code>.md` and its Prospects journal entries first, fill every answer in step 1 the profile gives, and ask only for the rest.
+
 2. **Create the record** in `Assistant/projects/<CODE>/`: `command-center.md` and `schedule.md` (both with the stamp line, Standard sections 7 and 9), `canon.md`, `archive.md`, `journal.md`, and an empty `notes/` folder.
 3. **Build the schedule** from the contract (`assistant:schedule`) and draft the Canon. Show the person both.
 4. **Register it:** a card in `PROJECTS.md` (tier, status, the person's role, where working files live, and a `Confidential:` line if anything is), and memory files for the client and its people (`assistant:memory`).

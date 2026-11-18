@@ -16,6 +16,7 @@ plugins/assistant/
     start-chat/  finish-chat/       every project chat, and Claude Code sessions ("join <CODE>")
     fold-in/  schedule/  replan/    managing projects
     new-project/                    "we have a new project"
+    prospects/                      optional pipeline for clients or deals before they sign
     client-communication/  editorial/
     memory/  good-morning/  inbox-zero/  nightly-check/
     dashboard/                      publishes the person's dashboard from their own account

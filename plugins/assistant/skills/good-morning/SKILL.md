@@ -17,13 +17,15 @@ Load `assistant:standard` (your manner is in section 2) and `assistant:home`. Ga
 5. **Messages in other tools.** Slack or Teams, if `ABOUT-ME.md` lists them: who's waiting on the person, mentions and direct messages since the last working day. Draft up to three replies; never send. Save Slack drafts with the Slack connector's draft tool (unsent, in their Slack Drafts), and under each put the channel link it returns as "Send it from Slack": the person sends from Slack itself. Slack allows one draft per channel; if one is already there, put the text in the briefing.
 6. **Inbox.** The junk sweep if it's on (`assistant:inbox-zero`). Then sort the rest into one proposal for a single go (promotions to Trash, receipts and notices to Archive, real people starred). Count starred mail and note anyone waiting since yesterday.
 7. **Texts**, if on (`assistant:home`, "Texts").
+8. **Prospects**, if they have a pipeline: next steps due today or overdue, from `STATUS.md`'s Prospects section (`assistant:prospects`).
 
 ## Monday: the weekly review
 
 Before the briefing on a Monday:
 1. Run the weekly check (`assistant:weekly-check`) and the weekly memory consolidation (`assistant:memory`).
 2. For each active project: where it stands in two sentences, the next milestone and its slack, risks with a recovery step (`assistant:replan` when a milestone is at risk), and decisions waiting on the person.
-3. Rewrite `PRIORITIES.md` for the week and bring HANDOFF current.
+3. Prospects, if they have a pipeline: one line on how many are open, what moved last week, and any stalled row with a suggested next step.
+4. Rewrite `PRIORITIES.md` for the week and bring HANDOFF current.
 
 In the briefing, give the top three projects a line each and say the rest are on track (or which aren't).
 
@@ -34,7 +36,7 @@ About a 30-second read, 150 to 200 words, conversational:
 2. Today's calendar and what needs prep; anything colliding.
 3. Anything they left in `NOTES.md`.
 4. Who's waiting on them (mail, texts, other tools); which replies are drafted and where.
-5. Projects: one line for each that's at risk, slipped, or has a decision waiting. Quiet projects get no line.
+5. Projects: one line for each that's at risk, slipped, or has a decision waiting. Quiet projects get no line. Prospects: one line for any next step due today or overdue, with its code.
 6. Inbox: junk trashed, the one-go proposal, then starred to-dos.
 7. The top two or three priorities.
 8. One nudge they didn't ask for: a deadline coming, a follow-up due, something sitting too long.

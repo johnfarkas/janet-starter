@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.3.0 (2026-11-17)
+
+- Standard v1.3, section 18: an optional Prospects pipeline (code PRO) for potential clients or deals, from the Janet Standard v3.4. New `prospects` skill: add, update, promote to a project on signing, park or lose. Kept as files in `projects/PRO/` (a table, one journal, a profile per prospect).
+- `setup` asks whether they chase clients or deals they'd like tracked, and sets the pipeline up if so. `new-project` has a "From Prospects" path; the nightly check and the morning briefing report next steps due and stalled prospects.
+
+What projects change: nothing.
+
 ## 1.2.0 (2026-11-17)
 
 An audit against the system this kit was built from, and against the current Claude desktop app.

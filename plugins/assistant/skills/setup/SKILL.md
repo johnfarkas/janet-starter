@@ -96,6 +96,8 @@ Record each tool under "Other tools" in `setup-answers.md`: the connector's name
 15. **Their projects.** First the list (name and one line each). Then, one project at a time, run `assistant:new-project` steps 1–4. Recommend separate Cowork projects (its step 5) only for the one to three busiest; the rest start inside the home project and move later.
 16. **Key people outside projects:** family, advisors, assistants, anyone you should recognize. Each becomes a memory file.
 
+Then ask: **do they chase new clients, customers or deals they'd like tracked?** If yes, set up the Prospects pipeline (`assistant:prospects`, "Set it up") and add each one they name now, one at a time.
+
 ## Part 6: The day
 
 17. **When they want the morning briefing and the end-of-day wrap-up, whether both should include their texts (Messages on the Mac), when their Mac is usually on and awake, and anything they'd like a nudge about first thing each morning** (a workout, a walk, a habit).
