@@ -5,7 +5,7 @@ description: The exact click paths in the Claude desktop app for Mac, for a pers
 
 # Cowork guide
 
-*Checked against Anthropic's Help Center and docs, Nov 17, 2026. The app changes often: if what the person sees differs from a step here, believe their screen, find the closest match with them, and note the difference in `HANDOFF.md` under "System changes" so the weekly check can propose an update to this guide.*
+*Checked against Anthropic's Help Center and docs, Nov 17, 2026, and the project page as it looked on Nov 18, 2026. The app changes often: if what the person sees differs from a step here, believe their screen, find the closest match with them, and note the difference in `HANDOFF.md` under "System changes" so the weekly check can propose an update to this guide.*
 
 Give these as numbered steps, one action each, with what they should see, and wait for "done". Use the labels in **bold** exactly.
 
@@ -19,21 +19,26 @@ Cowork is on the Pro, Max, Ultra, Team and Enterprise plans. The **Code** tab is
 
 ## Create a project
 
-1. In the left sidebar, find **Projects** and click **+**.
-2. Choose **Use an existing folder**, and pick the folder (for the home project, `Google Drive → My Drive → Assistant`). For a client project, choose **Start from scratch** and attach folders in step 4.
-3. Type the project's name.
-4. Paste the instructions block into **Instructions**.
-5. Click **Create**.
+Two separate steps: create the project with its name and instructions, then link the folder from the project's page.
 
-They should see the project's page, with **Instructions**, **Scheduled tasks**, **Context** and **Memory** sections.
+1. In the left sidebar, find **Projects** and click **+**.
+2. Choose **Start from scratch**.
+3. Type the project's name.
+4. Paste the instructions block into the instructions field.
+5. Leave every files or context field in this form empty, and click **Create**.
+
+**Never add a folder while creating the project.** The creation form's context area is for a few small reference documents; a large folder added there breaks the project. Folders go in through the project's page, below.
+
+**Link the folder:** on the project's page, the right-hand panel has rows for **Instructions**, **Context**, **Memory** and **Scheduled**.
+1. On the **Context** row, click **Add**.
+2. Choose to link a folder (the option that links rather than uploads), and pick the folder (for the home project, `Google Drive → My Drive → Assistant`). If macOS asks whether Claude may use files in Google Drive, click **Allow**.
+3. The **Context** row should now say "1 linked folder".
+
+Every project links the whole `Assistant` folder (Standard section 6); a client project may also link its working-files folder the same way. If Claude refuses a folder as a "protected location", pick the `Assistant` folder itself, never the top of Google Drive.
 
 **Name it right the first time.** The home project takes the assistant's name; a client project takes "<Client> - <CODE>". Renaming a project isn't confirmed in the current app, so avoid needing it.
 
-**Attach a folder to an existing project:** on the project's page, add it under **Context**, or drag the folder from Finder onto the project. Every project attaches the whole `Assistant` folder (Standard section 6).
-
-**Change a project's instructions later:** open the project and edit its **Instructions** section. Keep `PROMPTS.md` in step.
-
-If macOS asks whether Claude may access files in Google Drive, they click **Allow**. If Claude refuses a folder as a "protected location", pick the `Assistant` folder itself, never the top of Google Drive.
+**Change a project's instructions later:** on the project's page, click **Edit** on the **Instructions** row, replace the text, and save. Keep `PROMPTS.md` in step.
 
 ## Start a task in a project
 
@@ -41,6 +46,9 @@ Open the project and type in its message box. A message sent from a project's pa
 
 ## Scheduled tasks
 
+**From the project (preferred):** on the home project's page, click **Add** on the **Scheduled** row, and fill in the same details as below.
+
+**From the sidebar:**
 1. Click **Scheduled** in the left sidebar.
 2. Click **New task** (upper right).
 3. Choose **Set up manually**.

@@ -23,7 +23,7 @@ You are setting up a person's own assistant. They are not a developer. Load `ass
 2. Check your tools and the folder:
    - **The Assistant folder is attached to this project** and you can write in it: create `setup-answers.md` (heading `# Setup answers`, today's date) and read it back.
    - **Google Drive, Gmail and Google Calendar connectors** answer: search Drive for `setup-answers.md`, list today's events, search the inbox for one recent message.
-3. For anything missing, give the numbered steps to fix it (for a connector: `assistant:cowork-guide`, "Connectors", with their main Google account; for the folder: in Finder, create a folder named `Assistant` in Google Drive → My Drive, then attach it to this project under **Context**), and check again.
+3. For anything missing, give the numbered steps to fix it (for a connector: `assistant:cowork-guide`, "Connectors", with their main Google account; for the folder: in Finder, create a folder named `Assistant` in Google Drive → My Drive, then on this project's page click **Add** on the **Context** row and link it as a folder; never through the project creation form), and check again.
 
 ## Part 1: Start
 

@@ -23,9 +23,9 @@ The home assistant runs this.
 5. **Write the project instructions** from the template at the end of `assistant:standard`, filled in. Check before you hand it over: both paragraphs; the second names `assistant:start-chat`, `assistant:finish-chat` and the code; the first holds no dates or status.
 
    Then give the person numbered steps, one action each, each saying what they should see, with the block to copy:
-   1. In the Claude desktop app, open the **Cowork** tab and create a new project named "<Client> - <CODE>".
-   2. Attach the **whole** Assistant folder to the project (its chats read your profile and their record there), and the working-files folder if there is one.
-   3. Paste the project instructions into the project's instructions and save.
+   1. In the Claude desktop app, in the left sidebar, click **+** next to **Projects** and choose **Start from scratch**.
+   2. Name it "<Client> - <CODE>", paste the project instructions into the instructions field, add nothing else, and click **Create**.
+   3. On the new project's page, click **Add** on the **Context** row and link the **whole** Assistant folder (its chats read your profile and their record there). Link the working-files folder the same way if there is one. Never add folders in the creation form; a large folder there breaks the project.
    4. Start a new task in the project and type "hi, where do things stand?" It should load `assistant:start-chat` and answer from the new Command Center.
 
    Use the exact click paths in `assistant:cowork-guide`. Wait for "done" after each. Then add the instructions block to `PROMPTS.md` under the project's code.

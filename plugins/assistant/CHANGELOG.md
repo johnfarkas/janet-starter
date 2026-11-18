@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.3.1 (2026-11-18)
+
+- `cowork-guide`, `new-project` and `setup`: a project is created with **Start from scratch** (name and instructions only), and its folder is linked afterwards from the project's page (**Context** → **Add**). A large folder added in the creation form's context area breaks the project (found in testing, Nov 18). Instructions are changed later with **Edit** on the project's **Instructions** row; scheduled tasks can be added from its **Scheduled** row.
+
+What projects change: nothing.
+
 ## 1.3.0 (2026-11-17)
 
 - Standard v1.3, section 18: an optional Prospects pipeline (code PRO) for potential clients or deals, from the Janet Standard v3.4. New `prospects` skill: add, update, promote to a project on signing, park or lose. Kept as files in `projects/PRO/` (a table, one journal, a profile per prospect).
